@@ -24,8 +24,6 @@ class _BookFormPageState extends State<BookFormPage> {
   final _totalPageController = TextEditingController();
   final _readPageController = TextEditingController();
 
-  bool _isFinished = false;
-
   @override
   void initState() {
     super.initState();
@@ -63,13 +61,10 @@ class _BookFormPageState extends State<BookFormPage> {
       pageCount: int.parse(_totalPageController.text),
       readPage: int.parse(_readPageController.text),
     );
-    print('Submiting..');
 
     if (widget.book == null) {
-      print('Adding book..');
       controller.addBook(book);
     } else {
-      print('Update book..');
       controller.updateBook(widget.book!.id!, book);
     }
   }

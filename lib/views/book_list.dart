@@ -14,9 +14,12 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: Text('Books'),
         actions: [
-          IconButton(
-            onPressed: controller.fetchBooks,
-            icon: Icon(Icons.refresh),
+          Padding(
+            padding: const EdgeInsets.only(right: 24),
+            child: IconButton(
+              onPressed: controller.fetchBooks,
+              icon: Icon(Icons.refresh),
+            ),
           )
         ],
       ),

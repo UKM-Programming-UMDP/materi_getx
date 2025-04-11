@@ -30,7 +30,7 @@ class Other extends StatelessWidget {
                   SizedBox(height: 8),
                   Text('Read Page: ${book.readPage}'),
                   SizedBox(height: 8),
-                  Text('Finished: ${book.isFinished ? 'Yes' : 'No'}'),
+                  Text('Finished: ${book.isFinished! ? 'Yes' : 'No'}'),
                   SizedBox(height: 8),
                   Text('Summary: ${book.summary}'),
                   SizedBox(height: 8),

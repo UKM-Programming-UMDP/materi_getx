@@ -1,5 +1,5 @@
 class BookModel {
-  final String id;
+  final String? id;
   final String title;
   final int year;
   final String author;
@@ -7,12 +7,12 @@ class BookModel {
   final String publisher;
   final int pageCount;
   final int readPage;
-  final bool isFinished;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final bool? isFinished;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   BookModel({
-    required this.id,
+    this.id,
     required this.title,
     required this.year,
     required this.author,
@@ -20,9 +20,9 @@ class BookModel {
     required this.publisher,
     required this.pageCount,
     required this.readPage,
-    required this.isFinished,
-    required this.createdAt,
-    required this.updatedAt,
+    this.isFinished,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory BookModel.fromJson(Map<String, dynamic> json) {

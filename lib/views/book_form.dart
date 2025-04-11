@@ -38,7 +38,6 @@ class _BookFormPageState extends State<BookFormPage> {
       _yearController.text = book.year.toString();
       _totalPageController.text = book.pageCount.toString();
       _readPageController.text = book.readPage.toString();
-      _isFinished = book.isFinished;
     }
   }
 
@@ -56,7 +55,6 @@ class _BookFormPageState extends State<BookFormPage> {
 
   void _submitForm() {
     final book = BookModel(
-      id: widget.book?.id ?? '',
       title: _titleController.text,
       year: int.parse(_yearController.text),
       author: _authorController.text,
@@ -64,9 +62,6 @@ class _BookFormPageState extends State<BookFormPage> {
       publisher: _publisherController.text,
       pageCount: int.parse(_totalPageController.text),
       readPage: int.parse(_readPageController.text),
-      isFinished: _isFinished,
-      createdAt: widget.book?.createdAt ?? DateTime.now(),
-      updatedAt: DateTime.now(),
     );
     print('Submiting..');
 
@@ -75,7 +70,7 @@ class _BookFormPageState extends State<BookFormPage> {
       controller.addBook(book);
     } else {
       print('Update book..');
-      controller.updateBook(widget.book!.id, book);
+      controller.updateBook(widget.book!.id!, book);
     }
   }
 
@@ -121,11 +116,6 @@ class _BookFormPageState extends State<BookFormPage> {
                 controller: _readPageController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(labelText: 'Read Pages'),
-              ),
-              SwitchListTile(
-                title: const Text('Finished'),
-                value: _isFinished,
-                onChanged: (val) => setState(() => _isFinished = val),
               ),
               const SizedBox(height: 20),
               ElevatedButton(

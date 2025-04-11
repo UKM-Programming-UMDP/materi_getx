@@ -28,24 +28,49 @@ class Home extends StatelessWidget {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
         }
-        return ListView.builder(
-          itemCount: controller.bookList.length,
-          itemBuilder: (context, index) {
-            final book = controller.bookList[index];
-            return BookTile(
-              book: book,
-              onTap: () {
-                controller.book.value = book;
-                Get.to(() => BookDetail());
-              },
-              onEdit: () {
-                Get.to(() => BookFormPage(book: book));
-              },
-              onDismissed: (direction) {
-                controller.deleteBook(book.id!);
-              },
-            );
-          },
+        return Column(
+          children: [
+            Container(
+              width: double.infinity,
+              color: Colors.blue[100],
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              margin: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Icon(Icons.info_outline, color: Colors.blue),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      'Untung menghapus, geser item ke arah kiri.',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: controller.bookList.length,
+                itemBuilder: (context, index) {
+                  final book = controller.bookList[index];
+                  return BookTile(
+                    book: book,
+                    onTap: () {
+                      controller.book.value = book;
+                      Get.to(() => BookDetail());
+                    },
+                    onEdit: () {
+                      Get.to(() => BookFormPage(book: book));
+                    },
+                    onDismissed: (direction) {
+                      controller.deleteBook(book.id!);
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
         );
       }),
       floatingActionButton: FloatingActionButton(

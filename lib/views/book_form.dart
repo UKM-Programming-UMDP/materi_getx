@@ -14,7 +14,7 @@ class BookFormPage extends StatefulWidget {
 
 class _BookFormPageState extends State<BookFormPage> {
   final _formKey = GlobalKey<FormState>();
-  final controller = Get.put(Controller());
+  final controller = Get.find<Controller>();
 
   final _titleController = TextEditingController();
   final _authorController = TextEditingController();

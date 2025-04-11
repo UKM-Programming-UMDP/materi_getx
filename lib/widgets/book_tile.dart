@@ -24,7 +24,7 @@ class BookTile extends StatelessWidget {
       background: Container(
         color: Colors.red,
         alignment: Alignment.centerRight,
-        padding: EdgeInsets.only(right: 30),
+        padding: EdgeInsets.only(right: 32),
         child: Icon(Icons.delete, color: Colors.white),
       ),
       confirmDismiss: (direction) async {

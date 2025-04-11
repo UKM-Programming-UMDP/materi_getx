@@ -14,7 +14,7 @@ class Controller extends GetxController {
     fetchBooks();
   }
 
-  void fetchBooks() async {
+  Future<void> fetchBooks() async {
     try {
       final fetchedBooks = await _bookService.getAllBooks();
       books.value = fetchedBooks;
@@ -23,13 +23,11 @@ class Controller extends GetxController {
     }
   }
 
-  void selectBook(BookModel book) {
-    selectedBook.value = book;
-  }
-
-  Future<void> addBook(BookModel book) async {
+  void addBook(BookModel book) async {
     try {
       await _bookService.addBook(book);
+      await fetchBooks();
+      Get.back();
       Get.snackbar('Success', 'Book added');
     } catch (e) {
       Get.snackbar('Error', e.toString());
@@ -39,6 +37,8 @@ class Controller extends GetxController {
   Future<void> updateBook(String id, BookModel book) async {
     try {
       await _bookService.updateBook(id, book);
+      Get.back();
+      fetchBooks();
       Get.snackbar('Success', 'Book updated');
     } catch (e) {
       Get.snackbar('Error', e.toString());

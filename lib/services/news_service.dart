@@ -4,7 +4,7 @@ import 'package:materi_getx/models/article_model.dart';
 import 'package:materi_getx/models/news_response.dart';
 
 class NewsService {
-  final String _apiKey = '11fd7d4c1ca94d39b1ce0c0c103e0c4d';
+  final String _apiKey = 'YOUR API KEY';
   final String _baseUrl = 'https://newsapi.org/v2/top-headlines';
 
   Future<List<ArticleModel>> fetchTopTechHeadlines() async {

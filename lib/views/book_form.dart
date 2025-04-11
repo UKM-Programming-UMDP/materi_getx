@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materi_getx/controller.dart';
+import 'package:materi_getx/book_controller.dart';
 import 'package:materi_getx/models/book_model.dart';
 
 class BookFormPage extends StatefulWidget {
@@ -14,7 +14,7 @@ class BookFormPage extends StatefulWidget {
 
 class _BookFormPageState extends State<BookFormPage> {
   final _formKey = GlobalKey<FormState>();
-  final controller = Get.find<Controller>();
+  final controller = Get.find<BookController>();
 
   final _titleController = TextEditingController();
   final _authorController = TextEditingController();

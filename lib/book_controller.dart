@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:materi_getx/models/book_model.dart';
 import 'package:materi_getx/services/book_service.dart';
 
-class Controller extends GetxController {
+class BookController extends GetxController {
   final BookService _bookService = BookService();
 
   var books = <BookModel>[].obs;

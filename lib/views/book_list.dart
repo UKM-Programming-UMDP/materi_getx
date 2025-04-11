@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materi_getx/controller.dart';
+import 'package:materi_getx/book_controller.dart';
 import 'package:materi_getx/views/book_detail.dart';
 import 'package:materi_getx/views/book_form.dart';
 import 'package:materi_getx/widgets/book_tile.dart';
@@ -10,7 +10,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Controller controller = Get.put(Controller());
+    final controller = Get.put(BookController());
     return Scaffold(
       appBar: AppBar(
         title: Text('Books'),

@@ -11,9 +11,9 @@ class BookController extends GetxController {
   var book = Rxn<BookModel>();
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    fetchBooks();
+    await fetchBooks();
   }
 
   Future<void> fetchBooks() async {
@@ -76,7 +76,7 @@ class BookController extends GetxController {
     }
   }
 
-  Future<void> updateBook(String id, BookModel book) async {
+  void updateBook(String id, BookModel book) async {
     try {
       isLoading.value = true;
       await _bookService.updateBook(id, book);

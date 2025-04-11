@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:materi_getx/controllers/book_controller.dart';
 import 'package:materi_getx/models/book_model.dart';
+import 'package:materi_getx/utils/validator.dart';
 
 class BookFormPage extends StatefulWidget {
   final BookModel? book;
@@ -52,6 +53,8 @@ class _BookFormPageState extends State<BookFormPage> {
   }
 
   void _submitForm() {
+    if (!_formKey.currentState!.validate()) return;
+
     final book = BookModel(
       title: _titleController.text,
       year: int.parse(_yearController.text),
@@ -83,33 +86,40 @@ class _BookFormPageState extends State<BookFormPage> {
               TextFormField(
                 controller: _titleController,
                 decoration: InputDecoration(labelText: 'Title'),
+                validator: emptyValidator,
               ),
               TextFormField(
                 controller: _authorController,
                 decoration: InputDecoration(labelText: 'Author'),
+                validator: emptyValidator,
               ),
               TextFormField(
                 controller: _publisherController,
                 decoration: InputDecoration(labelText: 'Publisher'),
+                validator: emptyValidator,
               ),
               TextFormField(
                 controller: _summaryController,
                 decoration: InputDecoration(labelText: 'Summary'),
+                validator: emptyValidator,
               ),
               TextFormField(
                 controller: _yearController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(labelText: 'Year'),
+                validator: emptyValidator,
               ),
               TextFormField(
                 controller: _totalPageController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(labelText: 'Total Pages'),
+                validator: emptyValidator,
               ),
               TextFormField(
                 controller: _readPageController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(labelText: 'Read Pages'),
+                validator: emptyValidator,
               ),
               const SizedBox(height: 20),
               Obx(

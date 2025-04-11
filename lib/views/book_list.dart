@@ -26,13 +26,14 @@ class Home extends StatelessWidget {
       ),
       body: Obx(() {
         return ListView.builder(
-          itemCount: controller.books.length,
+          itemCount: controller.bookList.length,
           itemBuilder: (context, index) {
-            final book = controller.books[index];
+            final book = controller.bookList[index];
             return BookTile(
               book: book,
               onTap: () {
-                Get.to(() => BookDetail(book: book));
+                controller.book.value = book;
+                Get.to(() => BookDetail());
               },
               onEdit: () {
                 Get.to(() => BookFormPage(book: book));

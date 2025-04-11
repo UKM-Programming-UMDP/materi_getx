@@ -5,8 +5,10 @@ import 'package:materi_getx/services/book_service.dart';
 class BookController extends GetxController {
   final BookService _bookService = BookService();
 
-  var books = <BookModel>[].obs;
-  var selectedBook = Rxn<BookModel>();
+  var isLoading = false.obs;
+
+  var bookList = <BookModel>[].obs;
+  var book = Rxn<BookModel>();
 
   @override
   void onInit() {
@@ -16,10 +18,27 @@ class BookController extends GetxController {
 
   Future<void> fetchBooks() async {
     try {
-      final fetchedBooks = await _bookService.getAllBooks();
-      books.value = fetchedBooks;
+      final fetchedBookList = await _bookService.getAllBooks();
+      bookList.value = fetchedBookList;
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+
+  Future<void> fetchBookById(String id) async {
+    try {
+      final fetchedBook = await _bookService.getBookById(id);
+      book.value = fetchedBook;
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 
@@ -30,7 +49,11 @@ class BookController extends GetxController {
       Get.back();
       Get.snackbar('Success', 'Book added');
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 
@@ -41,7 +64,11 @@ class BookController extends GetxController {
       fetchBooks();
       Get.snackbar('Success', 'Book updated');
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 
@@ -49,7 +76,11 @@ class BookController extends GetxController {
     try {
       await _bookService.deleteBook(id);
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 }

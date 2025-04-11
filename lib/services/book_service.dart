@@ -23,7 +23,7 @@ class BookService {
 
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
-      return BookModel.fromJson(jsonData['data']);
+      return BookModel.fromJson(jsonData['data']['book']);
     } else {
       throw Exception('Book not found');
     }

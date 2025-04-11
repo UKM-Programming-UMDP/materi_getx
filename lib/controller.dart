@@ -26,4 +26,24 @@ class Controller extends GetxController {
   void selectBook(BookModel book) {
     selectedBook.value = book;
   }
+
+  Future<void> addBook(BookModel book) async {
+    try {
+      await _bookService.addBook(book);
+      Get.snackbar('Success', 'Book added');
+      Get.back();
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
+    }
+  }
+
+  Future<void> updateBook(String id, BookModel book) async {
+    try {
+      await _bookService.updateBook(id, book);
+      Get.snackbar('Success', 'Book updated');
+      Get.back();
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
+    }
+  }
 }

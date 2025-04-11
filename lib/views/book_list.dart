@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materi_getx/controllers/controller.dart';
+import 'package:materi_getx/controller.dart';
 import 'package:materi_getx/views/book_detail.dart';
+import 'package:materi_getx/views/book_form.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -23,12 +24,21 @@ class Home extends StatelessWidget {
                 controller.selectBook(book);
                 Get.to(() => Other());
               },
+              trailing: IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: () {
+                  controller.selectBook(book);
+                  Get.to(() => BookFormPage(book: book));
+                },
+              ),
             );
           },
         );
       }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.to(() => BookFormPage());
+        },
         child: const Icon(Icons.person),
       ),
     );

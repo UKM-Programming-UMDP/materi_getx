@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:materi_getx/home.dart';
+import 'package:materi_getx/views/book_list.dart';
 
 void main() {
   runApp(const MainApp());

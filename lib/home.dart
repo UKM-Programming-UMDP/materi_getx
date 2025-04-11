@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:materi_getx/controller.dart';
 import 'package:materi_getx/other.dart';
 
-class Home extends GetView<Controller> {
+class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Controller c = Get.put(Controller());
+    final Controller controller = Get.put(Controller());
     return Scaffold(
-      appBar: AppBar(title: Obx(() => Text("Clicks: ${c.count}"))),
+      appBar: AppBar(title: Text('News')),
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
@@ -38,6 +38,7 @@ class Home extends GetView<Controller> {
               title: Text(article.title ?? 'No Title'),
               subtitle: Text(article.description ?? 'No Description'),
               onTap: () {
+                controller.selectArticle(article);
                 Get.to(() => Other());
               },
             );
@@ -45,7 +46,7 @@ class Home extends GetView<Controller> {
         );
       }),
       floatingActionButton: FloatingActionButton(
-        onPressed: c.increment,
+        onPressed: controller.increment,
         child: const Icon(Icons.add),
       ),
     );

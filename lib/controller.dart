@@ -12,6 +12,8 @@ class Controller extends GetxController {
   var articles = <ArticleModel>[].obs;
   var error = ''.obs;
 
+  var selectedArticle = Rxn<ArticleModel>();
+
   @override
   void onInit() {
     super.onInit();
@@ -29,5 +31,9 @@ class Controller extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  void selectArticle(ArticleModel article) {
+    selectedArticle.value = article;
   }
 }

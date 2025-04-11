@@ -55,8 +55,6 @@ class _BookFormPageState extends State<BookFormPage> {
   }
 
   void _submitForm() {
-    if (!_formKey.currentState!.validate()) return;
-
     final book = BookModel(
       id: widget.book?.id ?? '',
       title: _titleController.text,
@@ -70,10 +68,13 @@ class _BookFormPageState extends State<BookFormPage> {
       createdAt: widget.book?.createdAt ?? DateTime.now(),
       updatedAt: DateTime.now(),
     );
+    print('Submiting..');
 
     if (widget.book == null) {
+      print('Adding book..');
       controller.addBook(book);
     } else {
+      print('Update book..');
       controller.updateBook(widget.book!.id, book);
     }
   }

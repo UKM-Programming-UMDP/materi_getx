@@ -33,7 +33,7 @@ class BookService {
     final response = await http.post(
       Uri.parse('$baseUrl/books'),
       headers: {'Content-Type': 'application/json'},
-      body: json.encode(book.toJson()),
+      body: json.encode(book.createBook()),
     );
 
     if (response.statusCode != 201) {
@@ -45,8 +45,11 @@ class BookService {
     final response = await http.put(
       Uri.parse('$baseUrl/books/$id'),
       headers: {'Content-Type': 'application/json'},
-      body: json.encode(book.toJson()),
+      body: json.encode(book.updateBook()),
     );
+
+    print(response.statusCode);
+    print(response.body);
 
     if (response.statusCode != 200) {
       throw Exception('Failed to update book');

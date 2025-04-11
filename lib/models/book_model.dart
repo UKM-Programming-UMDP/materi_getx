@@ -1,29 +1,3 @@
-class BookResponse {
-  final String status;
-  final List<BookModel> data;
-
-  BookResponse({
-    required this.status,
-    required this.data,
-  });
-
-  factory BookResponse.fromJson(Map<String, dynamic> json) {
-    return BookResponse(
-      status: json['status'],
-      data: List<BookModel>.from(
-        json['data'].map((book) => BookModel.fromJson(book)),
-      ),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'status': status,
-      'data': data.map((book) => book.toJson()).toList(),
-    };
-  }
-}
-
 class BookModel {
   final String id;
   final String title;
@@ -67,9 +41,8 @@ class BookModel {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> createBook() {
     return {
-      'id': id,
       'title': title,
       'year': year,
       'author': author,
@@ -77,9 +50,18 @@ class BookModel {
       'publisher': publisher,
       'pageCount': pageCount,
       'readPage': readPage,
-      'isFinished': isFinished,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
+
+  Map<String, dynamic> updateBook() {
+    return {
+      'title': title,
+      'year': year,
+      'author': author,
+      'summary': summary,
+      'publisher': publisher,
+      'pageCount': pageCount,
+      'readPage': readPage,
     };
   }
 }

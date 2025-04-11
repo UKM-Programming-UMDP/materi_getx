@@ -31,7 +31,6 @@ class Controller extends GetxController {
     try {
       await _bookService.addBook(book);
       Get.snackbar('Success', 'Book added');
-      Get.back();
     } catch (e) {
       Get.snackbar('Error', e.toString());
     }
@@ -41,7 +40,6 @@ class Controller extends GetxController {
     try {
       await _bookService.updateBook(id, book);
       Get.snackbar('Success', 'Book updated');
-      Get.back();
     } catch (e) {
       Get.snackbar('Error', e.toString());
     }

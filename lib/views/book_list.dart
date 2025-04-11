@@ -11,7 +11,15 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final Controller controller = Get.put(Controller());
     return Scaffold(
-      appBar: AppBar(title: Text('Books')),
+      appBar: AppBar(
+        title: Text('Books'),
+        actions: [
+          IconButton(
+            onPressed: controller.fetchBooks,
+            icon: Icon(Icons.refresh),
+          )
+        ],
+      ),
       body: Obx(() {
         return ListView.builder(
           itemCount: controller.books.length,
@@ -39,7 +47,7 @@ class Home extends StatelessWidget {
         onPressed: () {
           Get.to(() => BookFormPage());
         },
-        child: const Icon(Icons.person),
+        child: const Icon(Icons.add),
       ),
     );
   }

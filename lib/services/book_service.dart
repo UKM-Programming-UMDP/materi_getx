@@ -48,9 +48,6 @@ class BookService {
       body: json.encode(book.updateBook()),
     );
 
-    print(response.statusCode);
-    print(response.body);
-
     if (response.statusCode != 200) {
       throw Exception('Failed to update book');
     }

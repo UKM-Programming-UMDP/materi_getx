@@ -19,7 +19,7 @@ class Controller extends GetxController {
       final fetchedBooks = await _bookService.getAllBooks();
       books.value = fetchedBooks;
     } catch (e) {
-      print(e.toString());
+      Get.snackbar('Error', e.toString());
     }
   }
 
@@ -40,6 +40,14 @@ class Controller extends GetxController {
     try {
       await _bookService.updateBook(id, book);
       Get.snackbar('Success', 'Book updated');
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
+    }
+  }
+
+  void deleteBook(String id) async {
+    try {
+      await _bookService.deleteBook(id);
     } catch (e) {
       Get.snackbar('Error', e.toString());
     }

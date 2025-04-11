@@ -28,19 +28,52 @@ class Home extends StatelessWidget {
           itemCount: controller.books.length,
           itemBuilder: (context, index) {
             final book = controller.books[index];
-            return ListTile(
-              title: Text(book.title),
-              subtitle: Text(book.author),
-              onTap: () {
-                controller.selectBook(book);
-                Get.to(() => Other());
+            return Dismissible(
+              key: Key(book.id!),
+              direction: DismissDirection.endToStart,
+              background: Container(
+                color: Colors.red,
+                alignment: Alignment.centerRight,
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Icon(Icons.delete, color: Colors.white),
+              ),
+              confirmDismiss: (direction) async {
+                return await Get.dialog<bool>(
+                  AlertDialog(
+                    title: Text('Delete Book'),
+                    content: Text(
+                        'Are you sure you want to delete "${book.title}"?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Get.back(result: false),
+                        child: Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () => Get.back(result: true),
+                        child:
+                            Text('Delete', style: TextStyle(color: Colors.red)),
+                      ),
+                    ],
+                  ),
+                );
               },
-              trailing: IconButton(
-                icon: Icon(Icons.edit),
-                onPressed: () {
+              onDismissed: (direction) {
+                controller.deleteBook(book.id!);
+              },
+              child: ListTile(
+                title: Text(book.title),
+                subtitle: Text(book.author),
+                onTap: () {
                   controller.selectBook(book);
-                  Get.to(() => BookFormPage(book: book));
+                  Get.to(() => Other());
                 },
+                trailing: IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {
+                    controller.selectBook(book);
+                    Get.to(() => BookFormPage(book: book));
+                  },
+                ),
               ),
             );
           },

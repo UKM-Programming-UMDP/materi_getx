@@ -84,59 +84,57 @@ class _BookFormPageState extends State<BookFormPage> {
 
     return Scaffold(
       appBar: AppBar(title: Text(isEdit ? 'Edit Book' : 'Add Book')),
-      body: Obx(() {
-        return SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: _titleController,
-                  decoration: InputDecoration(labelText: 'Title'),
-                ),
-                TextFormField(
-                  controller: _authorController,
-                  decoration: InputDecoration(labelText: 'Author'),
-                ),
-                TextFormField(
-                  controller: _publisherController,
-                  decoration: InputDecoration(labelText: 'Publisher'),
-                ),
-                TextFormField(
-                  controller: _summaryController,
-                  decoration: InputDecoration(labelText: 'Summary'),
-                ),
-                TextFormField(
-                  controller: _yearController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(labelText: 'Year'),
-                ),
-                TextFormField(
-                  controller: _totalPageController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(labelText: 'Total Pages'),
-                ),
-                TextFormField(
-                  controller: _readPageController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(labelText: 'Read Pages'),
-                ),
-                SwitchListTile(
-                  title: const Text('Finished'),
-                  value: _isFinished,
-                  onChanged: (val) => setState(() => _isFinished = val),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _submitForm,
-                  child: Text(isEdit ? 'Update Book' : 'Add Book'),
-                ),
-              ],
-            ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: _titleController,
+                decoration: InputDecoration(labelText: 'Title'),
+              ),
+              TextFormField(
+                controller: _authorController,
+                decoration: InputDecoration(labelText: 'Author'),
+              ),
+              TextFormField(
+                controller: _publisherController,
+                decoration: InputDecoration(labelText: 'Publisher'),
+              ),
+              TextFormField(
+                controller: _summaryController,
+                decoration: InputDecoration(labelText: 'Summary'),
+              ),
+              TextFormField(
+                controller: _yearController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Year'),
+              ),
+              TextFormField(
+                controller: _totalPageController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Total Pages'),
+              ),
+              TextFormField(
+                controller: _readPageController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Read Pages'),
+              ),
+              SwitchListTile(
+                title: const Text('Finished'),
+                value: _isFinished,
+                onChanged: (val) => setState(() => _isFinished = val),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _submitForm,
+                child: Text(isEdit ? 'Update Book' : 'Add Book'),
+              ),
+            ],
           ),
-        );
-      }),
+        ),
+      ),
     );
   }
 }

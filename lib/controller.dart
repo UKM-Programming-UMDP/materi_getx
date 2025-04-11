@@ -1,39 +1,29 @@
 import 'package:get/get.dart';
-import 'package:materi_getx/models/article_model.dart';
-import 'package:materi_getx/services/news_service.dart';
+import 'package:materi_getx/models/book_model.dart';
+import 'package:materi_getx/services/book_service.dart';
 
 class Controller extends GetxController {
-  var count = 0.obs;
-  increment() => count++;
+  final BookService _bookService = BookService();
 
-  final NewsService _newsService = NewsService();
-
-  var isLoading = true.obs;
-  var articles = <ArticleModel>[].obs;
-  var error = ''.obs;
-
-  var selectedArticle = Rxn<ArticleModel>();
+  var books = <BookModel>[].obs;
+  var selectedBook = Rxn<BookModel>();
 
   @override
   void onInit() {
     super.onInit();
-    fetchNews();
+    fetchBooks();
   }
 
-  void fetchNews() async {
+  void fetchBooks() async {
     try {
-      isLoading.value = true;
-      error.value = '';
-      final fetchedArticles = await _newsService.fetchTopTechHeadlines();
-      articles.value = fetchedArticles;
+      final fetchedBooks = await _bookService.getAllBooks();
+      books.value = fetchedBooks;
     } catch (e) {
-      error.value = e.toString();
-    } finally {
-      isLoading.value = false;
+      print(e.toString());
     }
   }
 
-  void selectArticle(ArticleModel article) {
-    selectedArticle.value = article;
+  void selectBook(BookModel book) {
+    selectedBook.value = book;
   }
 }

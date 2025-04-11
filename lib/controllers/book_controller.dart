@@ -18,6 +18,7 @@ class BookController extends GetxController {
 
   Future<void> fetchBooks() async {
     try {
+      isLoading.value = true;
       final fetchedBookList = await _bookService.getAllBooks();
       bookList.value = fetchedBookList;
     } catch (e) {
@@ -26,11 +27,16 @@ class BookController extends GetxController {
         e.toString(),
         snackPosition: SnackPosition.BOTTOM,
       );
+    } finally {
+      Future.delayed(Duration(seconds: 1), () {
+        isLoading.value = false;
+      });
     }
   }
 
   Future<void> fetchBookById(String id) async {
     try {
+      isLoading.value = true;
       final fetchedBook = await _bookService.getBookById(id);
       book.value = fetchedBook;
     } catch (e) {
@@ -39,36 +45,58 @@ class BookController extends GetxController {
         e.toString(),
         snackPosition: SnackPosition.BOTTOM,
       );
+    } finally {
+      Future.delayed(Duration(seconds: 1), () {
+        isLoading.value = false;
+      });
     }
   }
 
   void addBook(BookModel book) async {
     try {
+      isLoading.value = true;
       await _bookService.addBook(book);
       await fetchBooks();
       Get.back();
-      Get.snackbar('Success', 'Book added');
+      Get.snackbar(
+        'Success',
+        'Book added',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } catch (e) {
       Get.snackbar(
         'Error',
         e.toString(),
         snackPosition: SnackPosition.BOTTOM,
       );
+    } finally {
+      Future.delayed(Duration(seconds: 1), () {
+        isLoading.value = false;
+      });
     }
   }
 
   Future<void> updateBook(String id, BookModel book) async {
     try {
+      isLoading.value = true;
       await _bookService.updateBook(id, book);
+      await fetchBooks();
       Get.back();
-      fetchBooks();
-      Get.snackbar('Success', 'Book updated');
+      Get.snackbar(
+        'Success',
+        'Book updated',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } catch (e) {
       Get.snackbar(
         'Error',
         e.toString(),
         snackPosition: SnackPosition.BOTTOM,
       );
+    } finally {
+      Future.delayed(Duration(seconds: 1), () {
+        isLoading.value = false;
+      });
     }
   }
 

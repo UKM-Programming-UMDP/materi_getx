@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materi_getx/book_controller.dart';
+import 'package:materi_getx/controllers/book_controller.dart';
 import 'package:materi_getx/models/book_model.dart';
 
 class BookDetail extends StatelessWidget {
@@ -10,6 +10,9 @@ class BookDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<BookController>();
     return Obx(() {
+      if (controller.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      }
       final BookModel book = controller.book.value!;
       return Scaffold(
         appBar: AppBar(

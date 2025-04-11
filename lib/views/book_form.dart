@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materi_getx/book_controller.dart';
+import 'package:materi_getx/controllers/book_controller.dart';
 import 'package:materi_getx/models/book_model.dart';
 
 class BookFormPage extends StatefulWidget {
@@ -72,7 +72,6 @@ class _BookFormPageState extends State<BookFormPage> {
   @override
   Widget build(BuildContext context) {
     final isEdit = widget.book != null;
-
     return Scaffold(
       appBar: AppBar(title: Text(isEdit ? 'Edit Book' : 'Add Book')),
       body: SingleChildScrollView(
@@ -113,9 +112,13 @@ class _BookFormPageState extends State<BookFormPage> {
                 decoration: InputDecoration(labelText: 'Read Pages'),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _submitForm,
-                child: Text(isEdit ? 'Update Book' : 'Add Book'),
+              Obx(
+                () => controller.isLoading.value
+                    ? const CircularProgressIndicator()
+                    : ElevatedButton(
+                        onPressed: _submitForm,
+                        child: Text(isEdit ? 'Update Book' : 'Add Book'),
+                      ),
               ),
             ],
           ),

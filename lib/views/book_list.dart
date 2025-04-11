@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:materi_getx/book_controller.dart';
+import 'package:materi_getx/controllers/book_controller.dart';
 import 'package:materi_getx/views/book_detail.dart';
 import 'package:materi_getx/views/book_form.dart';
 import 'package:materi_getx/widgets/book_tile.dart';
@@ -25,6 +25,9 @@ class Home extends StatelessWidget {
         ],
       ),
       body: Obx(() {
+        if (controller.isLoading.value) {
+          return const Center(child: CircularProgressIndicator());
+        }
         return ListView.builder(
           itemCount: controller.bookList.length,
           itemBuilder: (context, index) {
